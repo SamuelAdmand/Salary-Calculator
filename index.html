@@ -3,14 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salary Calculator (Desktop/Mobile)</title>
+    <title>Salary Calculator (Generate Report)</title> <!-- Updated Title -->
     <link rel="stylesheet" href="style.css">
-
-    <!-- ==== Google AdSense Verification Code ==== -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4283018454841330"
-         crossorigin="anonymous"></script>
-    <!-- ==== End AdSense Code ==== -->
-
+    <!-- html2canvas is NO LONGER NEEDED for this approach -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" referrerpolicy="no-referrer"></script> -->
 </head>
 <body>
 
@@ -48,6 +44,7 @@
     </div>
 
     <!-- Output / Calculation Section -->
+    <!-- Removed id="captureArea" as it's not needed -->
     <div class="output-section">
         <h2>Salary Calculation (per month)</h2>
 
@@ -106,6 +103,11 @@
         <hr>
         <div class="result-row net"><span>Net Salary:</span> <span id="outNetSalary">0</span></div>
         <hr>
+
+        <!-- Save Button Area -->
+        <div class="save-section">
+             <button id="saveImageBtn" class="save-btn">Generate Salary Report Image</button> <!-- Changed button text -->
+        </div>
 
     </div>
 
