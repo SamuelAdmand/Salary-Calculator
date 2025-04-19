@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Crucial for responsiveness -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salary Calculator with Dynamic Entries</title>
+    <title>Salary Calculator (Desktop/Mobile)</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- ==== Google AdSense Verification Code ==== -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4283018454841330"
+         crossorigin="anonymous"></script>
+    <!-- ==== End AdSense Code ==== -->
+
 </head>
 <body>
 
@@ -56,10 +61,8 @@
         <div class="result-row"><span>TA (Travelling Allowance):</span> <span id="outTA">0</span></div>
 
         <!-- Container for *Finalized* Other Allowances Rows -->
-        <div id="otherAllowancesContainer">
-            <!-- Finalized allowance rows will be added here -->
-        </div>
-        <!-- Container for the *Temporary Input* Row for Allowances (Initially Hidden) -->
+        <div id="otherAllowancesContainer"></div>
+        <!-- Container for the *Temporary Input* Row for Allowances -->
         <div id="addAllowanceInputArea" class="input-area"></div>
         <!-- Control Row for Allowances -->
         <div class="result-row calculation-control allowance-control">
@@ -87,10 +90,8 @@
              <hr style="margin: 5px 0;">
 
              <!-- Container for *Finalized* Other Deductions Rows -->
-            <div id="otherDeductionsContainer">
-                <!-- Finalized deduction rows will be added here -->
-            </div>
-            <!-- Container for the *Temporary Input* Row for Deductions (Initially Hidden) -->
+            <div id="otherDeductionsContainer"></div>
+            <!-- Container for the *Temporary Input* Row for Deductions -->
             <div id="addDeductionInputArea" class="input-area"></div>
             <!-- Control Row for Deductions -->
             <div class="result-row calculation-control deduction-control">
