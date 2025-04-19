@@ -1,18 +1,22 @@
+/* ===========================
+   Base Styles (Desktop First)
+   =========================== */
 body {
     font-family: sans-serif;
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
     font-size: 16px;
+    line-height: 1.5;
 }
 
 .calculator {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 0;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 10px auto;
+    padding: 25px; /* More padding on desktop */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    max-width: 700px; /* Wider max-width for desktop */
+    margin: 30px auto; /* Centering with top/bottom margin */
     box-sizing: border-box;
 }
 
@@ -20,81 +24,99 @@ h1, h2, h3, h4 {
     text-align: center;
     color: #333;
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
-h1 { font-size: 1.6em; }
-h2 { font-size: 1.3em; }
-h3 { font-size: 1.1em; margin-bottom: 10px; }
+h1 { font-size: 1.8em; }
+h2 { font-size: 1.4em; margin-top: 25px; }
+h3 { font-size: 1.2em; margin-bottom: 15px; text-align: left; color: #555;}
 
 
 .input-section, .output-section {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 label {
     display: block;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin-top: 12px;
+    margin-bottom: 6px;
     font-weight: bold;
+    color: #444;
 }
 
 input[type="number"], select {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 10px;
+    margin-bottom: 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
     font-size: 1em;
 }
+/* Slightly different focus style */
+input[type="number"]:focus, select:focus {
+    border-color: #5bc0de;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(91, 192, 222, 0.3);
+}
 
-#basicPayContainer { margin-bottom: 10px; }
+
+#basicPayContainer { margin-bottom: 12px; }
 #basicPayContainer label { margin-top: 0; }
 
 /* General Output Section Styling */
-.output-section { border: 1px solid #eee; padding: 15px; background-color: #f9f9f9; border-radius: 5px; }
+.output-section { border: 1px solid #eee; padding: 20px; background-color: #fdfdfd; border-radius: 5px; }
 
-.result-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; align-items: center; flex-wrap: nowrap; }
+.result-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0; /* More padding */
+    border-bottom: 1px solid #eee;
+    align-items: center;
+    flex-wrap: nowrap; /* Default: No wrap */
+}
+/* Remove bottom border logic */
 #otherAllowancesContainer + .input-area + .calculation-control,
-#otherDeductionsContainer + .input-area + .calculation-control { border-bottom: none; }
+#otherDeductionsContainer + .input-area + .calculation-control,
+.deductions .deduction-option:last-of-type {
+     border-bottom: none;
+}
 #otherAllowancesContainer > .result-row,
 #otherDeductionsContainer > .result-row { border-bottom: 1px dotted #eee; }
 #otherAllowancesContainer > .result-row:last-of-type,
 #otherDeductionsContainer > .result-row:last-of-type { border-bottom: none; }
 
-.result-row span:first-child { font-weight: normal; color: #555; text-align: left; padding-right: 10px; flex-grow: 1; flex-shrink: 1; }
-.result-row span:last-child { font-weight: bold; text-align: right; flex-shrink: 0; white-space: nowrap; }
 
-.gross span, .net span { font-weight: bold; font-size: 1.1em; }
+.result-row span:first-child { font-weight: normal; color: #555; text-align: left; padding-right: 15px; flex-grow: 1; flex-shrink: 1; }
+.result-row span:last-child { font-weight: bold; text-align: right; flex-shrink: 0; white-space: nowrap; color: #333; }
+
+.gross span, .net span { font-weight: bold; font-size: 1.15em; }
 .gross span:last-child { color: #31708f; }
 .net span:last-child { color: #a94442; }
 
-hr { border: 0; height: 1px; background-color: #ddd; margin: 15px 0; }
+hr { border: 0; height: 1px; background-color: #ddd; margin: 20px 0; }
 
 /* Deductions Section Specifics */
-.deductions { margin-top: 15px; padding-top: 10px; border-top: 1px dashed #ccc; }
-.deductions h3 { text-align: left; color: #666; }
-.deductions .result-row { border-bottom: none; padding: 4px 0; }
+.deductions { margin-top: 20px; padding-top: 15px; border-top: 1px dashed #ccc; }
+.deductions .result-row { border-bottom: none; padding: 5px 0; } /* For total row inside deductions */
 .total-deductions span { font-weight: bold; }
 
 /* Checkbox Deduction Options */
-.deductions .deduction-option { display: flex; align-items: center; padding: 6px 0; justify-content: flex-start; border-bottom: 1px solid #eee; }
-.deductions .deduction-option:last-of-type { border-bottom: none; }
-.deductions .deduction-option input[type="checkbox"] { width: auto; margin-right: 8px; flex-shrink: 0; }
-.deductions .deduction-option label { margin: 0; font-weight: normal; flex-grow: 1; text-align: left; }
-.deductions .deduction-option span { font-weight: bold; text-align: right; min-width: 40px; padding-left: 10px; flex-shrink: 0; }
+.deductions .deduction-option { display: flex; align-items: center; padding: 8px 0; justify-content: flex-start; border-bottom: 1px solid #eee; }
+.deductions .deduction-option input[type="checkbox"] { width: auto; margin-right: 10px; flex-shrink: 0; transform: scale(1.1); cursor: pointer; }
+.deductions .deduction-option label { margin: 0; font-weight: normal; flex-grow: 1; text-align: left; cursor: pointer; }
+.deductions .deduction-option span { font-weight: bold; text-align: right; min-width: 50px; padding-left: 10px; flex-shrink: 0; }
 
-/* --- Styles for Dynamic Rows --- */
-.input-area { padding: 10px 5px 5px 5px; margin-bottom: 5px; display: none; }
+/* --- Styles for Dynamic Rows (Desktop) --- */
+.input-area { padding: 10px 0 5px 0; margin-bottom: 8px; display: none; }
 .input-area.visible { display: block; }
 
-.temporary-input-row { display: flex; align-items: center; margin-bottom: 5px; flex-wrap: wrap; }
+.temporary-input-row { display: flex; align-items: center; margin-bottom: 8px; flex-wrap: nowrap; /* No wrap on desktop */ }
 .temporary-input-row input[type="text"],
-.temporary-input-row input[type="number"] { flex-grow: 1; margin: 0 5px 5px 0; width: auto; padding: 6px; border: 1px solid #ccc; border-radius: 3px; }
+.temporary-input-row input[type="number"] { flex-grow: 1; margin: 0 5px 0 0; width: auto; padding: 6px 8px; border: 1px solid #ccc; border-radius: 3px; }
 .temporary-input-row input.item-label { flex-grow: 2; margin-right: 10px; }
 
 /* General Add/Remove Buttons */
-.remove-btn, .add-remove-btn, .finalize-add-btn, .cancel-add-btn { color: white; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 0.9em; margin-left: 5px; flex-shrink: 0; }
+.remove-btn, .add-remove-btn, .finalize-add-btn, .cancel-add-btn { color: white; border: none; border-radius: 4px; padding: 5px 12px; cursor: pointer; font-size: 0.9em; margin-left: 8px; flex-shrink: 0; transition: background-color 0.2s ease; }
 .remove-btn { background-color: #d9534f; }
 .add-remove-btn { background-color: #5cb85c; }
 .finalize-add-btn { background-color: #5bc0de; }
@@ -105,90 +127,105 @@ hr { border: 0; height: 1px; background-color: #ddd; margin: 15px 0; }
 .cancel-add-btn:hover { background-color: #ec971f; }
 
 /* Row containing Add/Remove buttons and totals */
-.calculation-control { border-top: 1px solid #eee; padding-top: 8px; margin-top: 5px; border-bottom: none; }
+.calculation-control { border-top: 1px solid #eee; padding-top: 10px; margin-top: 8px; border-bottom: none; }
 .calculation-control span:first-child { font-weight: bold; color: #333; }
 .calculation-control button { margin-left: auto; }
 
 /* Finalized dynamic rows */
 #otherAllowancesContainer .result-row,
-#otherDeductionsContainer .result-row { padding: 4px 0; border-bottom: 1px dotted #eee; }
-#otherAllowancesContainer .result-row:last-child,
-#otherDeductionsContainer .result-row:last-child { border-bottom: none; }
+#otherDeductionsContainer .result-row { padding: 5px 0; border-bottom: 1px dotted #eee; }
 #otherAllowancesContainer .result-row .remove-btn,
-#otherDeductionsContainer .result-row .remove-btn { margin-left: 10px; }
+#otherDeductionsContainer .result-row .remove-btn { margin-left: 15px; }
 
 /* Disclaimer */
-.disclaimer { margin-top: 20px; font-size: 0.8em; color: #777; text-align: center; padding: 0 10px; }
+.disclaimer { margin-top: 25px; font-size: 0.85em; color: #777; text-align: center; padding: 0 15px; }
 
 
 /* ===========================
    Mobile Responsive Styles
    =========================== */
 @media (max-width: 600px) {
-    body { font-size: 14px; }
-    .calculator { padding: 10px; margin: 0; border-radius: 0; max-width: 100%; }
-    h1 { font-size: 1.4em; } h2 { font-size: 1.2em; } h3 { font-size: 1.0em; }
-    input[type="number"], select { padding: 10px 8px; }
+    body {
+        font-size: 14px; /* Adjust base font */
+        -webkit-text-size-adjust: 100%; /* Prevent font scaling on some mobiles */
+    }
 
-    /* Allow key-value rows to wrap */
-    .result-row, .deduction-option { flex-wrap: wrap; }
-    .result-row span:first-child, .deduction-option label { flex-basis: 100%; margin-bottom: 2px; padding-right: 0; color: #333; }
-    .result-row span:last-child, .deduction-option span { flex-basis: 100%; text-align: right; padding-left: 0; font-size: 1.05em; }
+    .calculator {
+        padding: 15px; /* Less padding */
+        margin: 0;
+        border-radius: 0;
+        max-width: 100%;
+        box-shadow: none; /* Remove shadow */
+    }
 
-    /* Total/Add button row */
-    .calculation-control span:first-child { flex-basis: auto; flex-grow: 1; }
+    h1 { font-size: 1.5em; margin-bottom: 15px;}
+    h2 { font-size: 1.25em; margin-bottom: 12px; }
+    h3 { font-size: 1.1em; margin-bottom: 8px; }
+
+    .input-section { margin-bottom: 15px; }
+    .output-section { padding: 15px; margin-bottom: 15px; }
+
+    input[type="number"], select { padding: 12px 10px; margin-bottom: 15px; } /* Larger touch targets */
+
+    /* Force result rows to stack */
+    .result-row {
+        flex-wrap: wrap;
+        padding: 6px 0; /* Adjust padding */
+        border-bottom: 1px solid #f0f0f0; /* Lighter border */
+    }
+    .result-row span:first-child {
+        flex-basis: 100%; margin-bottom: 3px; padding-right: 0; color: #444; font-weight: 500; /* Slightly bolder label */
+    }
+    .result-row span:last-child {
+        flex-basis: 100%; text-align: right; padding-left: 0; font-size: 1.1em; /* Larger value */
+    }
+
+    /* Adjust Total/Add button row */
+    .calculation-control { padding-top: 10px; margin-top: 8px; border-top: 1px solid #ddd; }
+    .calculation-control span:first-child { flex-basis: auto; flex-grow: 1; font-weight: bold; }
     .calculation-control span:last-child { flex-basis: auto; text-align: right; }
-    .calculation-control button.add-remove-btn { font-size: 0.85em; padding: 4px 8px; margin-left: 10px; }
+    .calculation-control button.add-remove-btn { font-size: 0.9em; padding: 6px 10px; margin-left: 10px; }
 
-    /* Finalized dynamic rows wrapping */
-    .dynamic-display-row span:first-child { flex-basis: 60%; margin-bottom: 0; }
-    .dynamic-display-row span:last-child { flex-basis: 30%; text-align: right; width: auto; margin-bottom: 0; }
-    .dynamic-display-row .remove-btn { flex-basis: auto; margin-left: auto; padding: 2px 6px; font-size: 0.8em; }
+    /* Adjust finalized dynamic rows */
+    .dynamic-display-row span:first-child { flex-basis: 100%; margin-bottom: 2px; } /* Name full width */
+    .dynamic-display-row span:last-child { flex-basis: 60%; text-align: right; font-size: 1.05em; } /* Value takes part */
+    .dynamic-display-row .remove-btn { flex-basis: auto; margin-left: auto; padding: 3px 8px; font-size: 0.85em; } /* Remove button */
 
 
-    /* --- FINAL FIX for Temporary input row on Mobile --- */
+    /* --- MOBILE Stacking FIX for Temporary input row --- */
+    .input-area { padding: 10px 0 5px 0; } /* Remove side padding */
     .temporary-input-row {
         flex-wrap: wrap; /* Ensure wrapping */
-        justify-content: flex-start; /* Align items left */
+        justify-content: flex-start;
     }
     /* Force inputs to take full width and stack */
     .temporary-input-row input.item-label,
     .temporary-input-row input.item-amount {
-        flex-basis: 100%; /* Take full line */
+        flex-basis: 100%;
         width: 100%;
-        margin-right: 0; /* Remove right margin */
-        margin-left: 0; /* Remove left margin */
-        margin-bottom: 8px; /* Space below each input */
+        margin: 0 0 10px 0; /* Only bottom margin */
         box-sizing: border-box;
+        padding: 10px 8px; /* Match other inputs */
     }
-    /* Container for the buttons - use display:flex itself */
-    /* We can wrap the buttons in a div if needed, or apply flex rules directly */
-    /* Applying directly to buttons: */
+    /* Force buttons full width and stacked */
      .temporary-input-row .finalize-add-btn,
      .temporary-input-row .cancel-add-btn {
-        flex-basis: calc(50% - 4px); /* Half width each, minus gap */
-        margin-top: 0; /* No extra top margin */
-        margin-left: 0;
-        margin-right: 0;
+        flex-basis: 100%;
+        width: 100%;
+        margin: 0 0 8px 0; /* Only bottom margin */
         box-sizing: border-box;
-        font-size: 0.9em;
-        padding: 6px 5px;
+        font-size: 1em; /* Normal button font size */
+        padding: 10px 5px; /* Make buttons tappable */
      }
-     /* Add the gap between the buttons */
-     .temporary-input-row .finalize-add-btn {
-        margin-right: 4px; /* Gap */
-     }
-     .temporary-input-row .cancel-add-btn {
-        margin-left: 4px; /* Gap */
-     }
-    /* --- End of FINAL FIX --- */
+    /* --- End of MOBILE Stacking FIX --- */
 
 
     /* Checkbox alignment */
-    .deduction-option input[type="checkbox"] { margin-top: 2px; }
-    .deduction-option label { flex-basis: calc(100% - 30px); margin-bottom: 0; }
-    .deduction-option span { flex-basis: 100%; margin-top: 2px; }
+    .deductions .deduction-option { flex-wrap: wrap; padding: 8px 0; }
+    .deductions .deduction-option input[type="checkbox"] { margin-bottom: 5px; transform: scale(1.2); } /* Larger checkbox */
+    .deductions .deduction-option label { flex-basis: calc(100% - 35px); margin-bottom: 0; padding-left: 5px; } /* Label next to checkbox */
+    .deductions .deduction-option span { flex-basis: 100%; margin-top: 4px; text-align: right; } /* Value below */
 
-    .disclaimer { font-size: 0.75em; }
+    .disclaimer { font-size: 0.8em; margin-top: 15px; padding: 0 5px; }
 
 } /* End of Media Query */
