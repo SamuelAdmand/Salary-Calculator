@@ -144,25 +144,20 @@ hr {
 .deductions .deduction-option span { font-weight: bold; text-align: right; min-width: 40px; padding-left: 10px; flex-shrink: 0; }
 
 /* --- Styles for Dynamic Rows --- */
-.input-area { padding: 10px 0 5px 0; margin-bottom: 5px; display: none; }
+.input-area { padding: 10px 5px 5px 5px; margin-bottom: 5px; display: none; } /* Added horiz padding */
 .input-area.visible { display: block; }
 
-.temporary-input-row { display: flex; align-items: center; margin-bottom: 5px; flex-wrap: wrap; /* Allow wrapping */ }
+.temporary-input-row { display: flex; align-items: center; margin-bottom: 5px; flex-wrap: wrap; } /* Allow wrapping */
 
 .temporary-input-row input[type="text"],
 .temporary-input-row input[type="number"] {
-    flex-grow: 1; margin: 0 5px 5px 0; /* Add bottom margin */ width: auto; padding: 6px; border: 1px solid #ccc; border-radius: 3px;
+    flex-grow: 1; margin: 0 5px 5px 0; width: auto; padding: 6px; border: 1px solid #ccc; border-radius: 3px;
 }
-.temporary-input-row input.item-label { flex-grow: 2; margin-right: 10px; flex-basis: 100%; /* Take full width initially */ }
-.temporary-input-row input.item-amount { flex-basis: calc(50% - 10px); /* Try half width for amount */ }
-
-/* Buttons in temp row */
-.temporary-input-row button { flex-basis: calc(50% - 10px); /* Try half width for buttons */ margin-left: 5px; }
-
+.temporary-input-row input.item-label { flex-grow: 2; margin-right: 10px; } /* Default state */
 
 /* General Add/Remove Buttons */
 .remove-btn, .add-remove-btn, .finalize-add-btn, .cancel-add-btn {
-    color: white; border: none; border-radius: 4px; padding: 4px 10px; /* Adjust padding */ cursor: pointer; font-size: 0.9em; margin-left: 5px; flex-shrink: 0;
+    color: white; border: none; border-radius: 4px; padding: 4px 10px; cursor: pointer; font-size: 0.9em; margin-left: 5px; flex-shrink: 0;
 }
 .remove-btn { background-color: #d9534f; }
 .add-remove-btn { background-color: #5cb85c; }
@@ -197,14 +192,14 @@ hr {
    =========================== */
 @media (max-width: 600px) {
     body {
-        font-size: 14px; /* Slightly smaller base font */
+        font-size: 14px;
     }
 
     .calculator {
-        padding: 10px; /* Reduce padding */
-        margin: 0; /* Remove margin for edge-to-edge */
+        padding: 10px;
+        margin: 0;
         border-radius: 0;
-        max-width: 100%; /* Allow full width */
+        max-width: 100%;
     }
 
     h1 { font-size: 1.4em; }
@@ -212,7 +207,7 @@ hr {
     h3 { font-size: 1.0em; }
 
     input[type="number"], select {
-        padding: 10px 8px; /* Slightly larger touch target */
+        padding: 10px 8px;
     }
 
     /* Allow key-value rows to wrap */
@@ -223,87 +218,64 @@ hr {
 
     .result-row span:first-child,
     .deduction-option label {
-        flex-basis: 100%; /* Label takes full width */
-        margin-bottom: 2px; /* Space below label when wrapped */
-        padding-right: 0;
-        color: #333; /* Darker label text for clarity */
+        flex-basis: 100%; margin-bottom: 2px; padding-right: 0; color: #333;
     }
 
     .result-row span:last-child,
     .deduction-option span {
-        flex-basis: 100%; /* Value takes full width */
-        text-align: right; /* Keep value aligned right */
-        padding-left: 0;
-        font-size: 1.05em; /* Slightly larger value text */
+        flex-basis: 100%; text-align: right; padding-left: 0; font-size: 1.05em;
     }
 
     /* Special handling for Total/Add button row */
-    .calculation-control span:first-child {
-         flex-basis: auto; /* Don't force total label full width */
-         flex-grow: 1;
-    }
-     .calculation-control span:last-child {
-         flex-basis: auto; /* Don't force total value full width */
-         text-align: right;
-    }
-    .calculation-control button.add-remove-btn {
-         font-size: 0.85em; /* Slightly smaller add button text */
-         padding: 4px 8px;
-         margin-left: 10px; /* Ensure space */
-    }
+    .calculation-control span:first-child { flex-basis: auto; flex-grow: 1; }
+    .calculation-control span:last-child { flex-basis: auto; text-align: right; }
+    .calculation-control button.add-remove-btn { font-size: 0.85em; padding: 4px 8px; margin-left: 10px; }
 
     /* Adjust finalized dynamic rows for wrapping */
-    .dynamic-display-row span:first-child { /* Name */
-         flex-basis: 60%; /* Give name more space */
-         margin-bottom: 0; /* No margin needed if side-by-side */
-    }
-    .dynamic-display-row span:last-child { /* Amount */
-         flex-basis: 30%; /* Amount takes less space */
-         text-align: right;
-         width: auto; /* Don't force full width */
-         margin-bottom: 0;
-    }
-     .dynamic-display-row .remove-btn {
-         flex-basis: auto; /* Let button size naturally */
-         margin-left: auto; /* Push remove button to the right */
-         padding: 2px 6px;
-         font-size: 0.8em;
-     }
+    .dynamic-display-row span:first-child { flex-basis: 60%; margin-bottom: 0; }
+    .dynamic-display-row span:last-child { flex-basis: 30%; text-align: right; width: auto; margin-bottom: 0; }
+    .dynamic-display-row .remove-btn { flex-basis: auto; margin-left: auto; padding: 2px 6px; font-size: 0.8em; }
 
 
-    /* Temporary input row adjustments */
+    /* --- FIX for Temporary input row on Mobile --- */
+    .temporary-input-row {
+        /* flex-wrap: wrap; */ /* Already set above */
+    }
     .temporary-input-row input.item-label {
         flex-basis: 100%; /* Label full width */
-        margin-right: 0; /* No right margin */
+        margin-right: 0; /* No right margin needed */
+        margin-bottom: 8px; /* Space below label */
+        box-sizing: border-box; /* Include padding/border in width */
     }
     .temporary-input-row input.item-amount {
-        flex-basis: calc(60% - 5px); /* Amount takes more space */
-        margin-right: 5px;
+        flex-basis: 100%; /* Amount full width */
+        margin-right: 0; /* No right margin needed */
+        margin-bottom: 8px; /* Space below amount */
+        box-sizing: border-box;
     }
+    /* Stack buttons below amount input */
     .temporary-input-row button {
-        flex-basis: calc(20% - 5px); /* Buttons take less space */
-        font-size: 0.85em;
-        padding: 5px; /* Adjust padding */
+        flex-basis: calc(50% - 4px); /* Try side-by-side buttons below */
+        font-size: 0.9em;
+        padding: 6px 5px;
+        margin: 0; /* Reset margin */
+        box-sizing: border-box;
     }
-    .temporary-input-row .finalize-add-btn { margin-left: 0; } /* Align Add button left */
-    .temporary-input-row .cancel-add-btn { margin-left: 5px; } /* Space before Cancel */
+     /* Add slight space between the two buttons */
+    .temporary-input-row .finalize-add-btn {
+         margin-right: 4px;
+    }
+     .temporary-input-row .cancel-add-btn {
+         margin-left: 4px;
+    }
+    /* --- End of FIX --- */
 
 
-    /* Ensure checkboxes align well */
-     .deduction-option input[type="checkbox"] {
-         margin-top: 2px; /* Align better with label */
-     }
-    .deduction-option label {
-         flex-basis: calc(100% - 30px); /* Adjust basis considering checkbox */
-         margin-bottom: 0; /* Remove bottom margin */
-    }
-     .deduction-option span {
-          flex-basis: 100%; /* Value below */
-          margin-top: 2px;
-     }
+    /* Checkbox alignment */
+     .deduction-option input[type="checkbox"] { margin-top: 2px; }
+    .deduction-option label { flex-basis: calc(100% - 30px); margin-bottom: 0; }
+     .deduction-option span { flex-basis: 100%; margin-top: 2px; }
 
-    .disclaimer {
-        font-size: 0.75em; /* Smaller disclaimer */
-    }
+    .disclaimer { font-size: 0.75em; }
 
 } /* End of Media Query */
