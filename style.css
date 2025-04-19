@@ -146,33 +146,42 @@ hr { border: 0; height: 1px; background-color: #ddd; margin: 15px 0; }
     .dynamic-display-row .remove-btn { flex-basis: auto; margin-left: auto; padding: 2px 6px; font-size: 0.8em; }
 
 
-    /* --- REVISED FIX for Temporary input row on Mobile --- */
+    /* --- FINAL FIX for Temporary input row on Mobile --- */
     .temporary-input-row {
-        /* Keep flex and wrap */
-        flex-wrap: wrap;
-        justify-content: flex-start; /* Align items to start */
+        flex-wrap: wrap; /* Ensure wrapping */
+        justify-content: flex-start; /* Align items left */
     }
+    /* Force inputs to take full width and stack */
     .temporary-input-row input.item-label,
     .temporary-input-row input.item-amount {
-        flex-basis: 100%; /* Force inputs full width */
-        width: 100%; /* Explicit width */
-        margin-right: 0; /* No right margin */
+        flex-basis: 100%; /* Take full line */
+        width: 100%;
+        margin-right: 0; /* Remove right margin */
+        margin-left: 0; /* Remove left margin */
         margin-bottom: 8px; /* Space below each input */
         box-sizing: border-box;
     }
-    /* Container for buttons */
-    .temporary-input-row .finalize-add-btn,
-    .temporary-input-row .cancel-add-btn {
-        flex-basis: calc(50% - 4px); /* Buttons side-by-side */
+    /* Container for the buttons - use display:flex itself */
+    /* We can wrap the buttons in a div if needed, or apply flex rules directly */
+    /* Applying directly to buttons: */
+     .temporary-input-row .finalize-add-btn,
+     .temporary-input-row .cancel-add-btn {
+        flex-basis: calc(50% - 4px); /* Half width each, minus gap */
+        margin-top: 0; /* No extra top margin */
+        margin-left: 0;
+        margin-right: 0;
+        box-sizing: border-box;
         font-size: 0.9em;
         padding: 6px 5px;
-        margin: 0; /* Reset margins */
-        box-sizing: border-box;
-    }
-    /* Space between buttons */
-    .temporary-input-row .finalize-add-btn { margin-right: 4px; }
-    .temporary-input-row .cancel-add-btn { margin-left: 4px; }
-    /* --- End of REVISED FIX --- */
+     }
+     /* Add the gap between the buttons */
+     .temporary-input-row .finalize-add-btn {
+        margin-right: 4px; /* Gap */
+     }
+     .temporary-input-row .cancel-add-btn {
+        margin-left: 4px; /* Gap */
+     }
+    /* --- End of FINAL FIX --- */
 
 
     /* Checkbox alignment */
