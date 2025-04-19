@@ -14,6 +14,7 @@ A web-based tool designed to calculate the salary of Central Government employee
   - Deductions (like NPS, CGEGIS, etc.)
 - Responsive and user-friendly interface
 - **Persistent data storage**: Input values are saved even after page reloads or closing the browser tab (until cache is cleared)
+- **Save salary details as an image**: Download a snapshot of your salary breakdown with one click
 
 ## Live Demo
 
