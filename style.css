@@ -1,22 +1,31 @@
 body {
     font-family: sans-serif;
-    margin: 20px;
+    margin: 0; /* Remove default body margin for better mobile control */
+    padding: 0;
     background-color: #f4f4f4;
+    font-size: 16px; /* Base font size */
 }
 
 .calculator {
     background-color: #fff;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 0; /* Remove radius for edge-to-edge feel on mobile */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     max-width: 600px;
-    margin: auto;
+    margin: 10px auto; /* Add some top/bottom margin */
+    box-sizing: border-box; /* Ensure padding is included in width */
 }
 
 h1, h2, h3, h4 {
     text-align: center;
     color: #333;
+    margin-top: 0; /* Adjust heading margins */
+    margin-bottom: 15px;
 }
+h1 { font-size: 1.6em; }
+h2 { font-size: 1.3em; }
+h3 { font-size: 1.1em; margin-bottom: 10px; }
+
 
 .input-section, .output-section {
     margin-bottom: 20px;
@@ -36,6 +45,7 @@ input[type="number"], select {
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
+    font-size: 1em; /* Inherit font size */
 }
 
 #basicPayContainer {
@@ -50,7 +60,7 @@ input[type="number"], select {
     border: 1px solid #eee;
     padding: 15px;
     background-color: #f9f9f9;
-    border-radius: 5px;
+    border-radius: 5px; /* Keep radius for output section */
 }
 
 .result-row {
@@ -59,16 +69,21 @@ input[type="number"], select {
     padding: 8px 0;
     border-bottom: 1px solid #eee;
     align-items: center;
+    flex-wrap: nowrap; /* Prevent wrapping by default on larger screens */
 }
 /* Remove bottom border from last static row before dynamic container */
 #otherAllowancesContainer + .input-area + .calculation-control,
 #otherDeductionsContainer + .input-area + .calculation-control {
      border-bottom: none;
 }
-/* Remove border from last dynamic item */
+/* Border for dynamic items */
+#otherAllowancesContainer > .result-row,
+#otherDeductionsContainer > .result-row {
+     border-bottom: 1px dotted #eee;
+}
 #otherAllowancesContainer > .result-row:last-of-type,
 #otherDeductionsContainer > .result-row:last-of-type {
-     border-bottom: 1px dotted #eee; /* Use dotted for dynamic ones */
+     border-bottom: none; /* No border after last dynamic item */
 }
 
 
@@ -77,13 +92,15 @@ input[type="number"], select {
     color: #555;
     text-align: left;
     padding-right: 10px;
-    flex-grow: 1;
+    flex-grow: 1; /* Allow label to take available space */
+    flex-shrink: 1; /* Allow label to shrink if needed */
 }
 
 .result-row span:last-child {
     font-weight: bold;
     text-align: right;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevent value from shrinking */
+    white-space: nowrap; /* Keep value on one line */
 }
 
 .gross span, .net span {
@@ -108,151 +125,185 @@ hr {
     border-top: 1px dashed #ccc;
 }
 
-.deductions h3 {
-    text-align: left;
-    margin-bottom: 10px;
-    color: #666;
-}
-.deductions .result-row {
-     border-bottom: none; /* Remove borders within standard deductions */
-     padding: 4px 0;
-}
-
-.total-deductions span {
-    font-weight: bold;
-}
+.deductions h3 { text-align: left; color: #666; }
+.deductions .result-row { border-bottom: none; padding: 4px 0; }
+.total-deductions span { font-weight: bold; }
 
 /* Checkbox Deduction Options */
 .deductions .deduction-option {
     display: flex;
     align-items: center;
-    padding: 4px 0;
+    padding: 6px 0; /* Slightly more padding */
     justify-content: flex-start;
-    border-bottom: 1px solid #eee; /* Add border back to checkbox rows */
+    border-bottom: 1px solid #eee;
 }
-.deductions .deduction-option:last-of-type {
-     border-bottom: none; /* Remove border from last checkbox row */
-}
+.deductions .deduction-option:last-of-type { border-bottom: none; }
 
-
-.deductions .deduction-option input[type="checkbox"] {
-    width: auto;
-    margin-right: 8px;
-    flex-shrink: 0;
-}
-
-.deductions .deduction-option label {
-     margin: 0;
-     font-weight: normal;
-     flex-grow: 1;
-     text-align: left;
-}
-
-.deductions .deduction-option span {
-    font-weight: bold;
-    text-align: right;
-    min-width: 50px;
-    padding-left: 10px;
-    flex-shrink: 0;
-}
+.deductions .deduction-option input[type="checkbox"] { width: auto; margin-right: 8px; flex-shrink: 0; }
+.deductions .deduction-option label { margin: 0; font-weight: normal; flex-grow: 1; text-align: left; }
+.deductions .deduction-option span { font-weight: bold; text-align: right; min-width: 40px; padding-left: 10px; flex-shrink: 0; }
 
 /* --- Styles for Dynamic Rows --- */
+.input-area { padding: 10px 0 5px 0; margin-bottom: 5px; display: none; }
+.input-area.visible { display: block; }
 
-/* Container for temporary inputs - HIDDEN by default */
-.input-area {
-    padding: 10px 0 5px 0;
-    /* border-bottom: 1px dashed #ccc; */ /* Remove border */
-    margin-bottom: 5px; /* Space before total row */
-    display: none; /* Hide initially */
-}
-.input-area.visible {
-    display: block; /* Show when adding */
-}
-
-/* The temporary input row */
-.temporary-input-row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 5px;
-}
+.temporary-input-row { display: flex; align-items: center; margin-bottom: 5px; flex-wrap: wrap; /* Allow wrapping */ }
 
 .temporary-input-row input[type="text"],
 .temporary-input-row input[type="number"] {
-    flex-grow: 1;
-    margin: 0 5px 0 0;
-    width: auto;
-    padding: 4px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
+    flex-grow: 1; margin: 0 5px 5px 0; /* Add bottom margin */ width: auto; padding: 6px; border: 1px solid #ccc; border-radius: 3px;
 }
-.temporary-input-row input.item-label {
-     flex-grow: 2;
-     margin-right: 10px;
-}
+.temporary-input-row input.item-label { flex-grow: 2; margin-right: 10px; flex-basis: 100%; /* Take full width initially */ }
+.temporary-input-row input.item-amount { flex-basis: calc(50% - 10px); /* Try half width for amount */ }
+
+/* Buttons in temp row */
+.temporary-input-row button { flex-basis: calc(50% - 10px); /* Try half width for buttons */ margin-left: 5px; }
+
 
 /* General Add/Remove Buttons */
 .remove-btn, .add-remove-btn, .finalize-add-btn, .cancel-add-btn {
-    color: white;
-    border: none;
-    border-radius: 4px;
-    padding: 3px 8px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin-left: 5px;
-    flex-shrink: 0;
+    color: white; border: none; border-radius: 4px; padding: 4px 10px; /* Adjust padding */ cursor: pointer; font-size: 0.9em; margin-left: 5px; flex-shrink: 0;
 }
-
-/* Specific Button Colors */
-.remove-btn { background-color: #d9534f; } /* Red */
-.add-remove-btn { background-color: #5cb85c; } /* Green */
-.finalize-add-btn { background-color: #5bc0de; } /* Blue */
-.cancel-add-btn { background-color: #f0ad4e; } /* Orange */
-
-/* Hover States */
+.remove-btn { background-color: #d9534f; }
+.add-remove-btn { background-color: #5cb85c; }
+.finalize-add-btn { background-color: #5bc0de; }
+.cancel-add-btn { background-color: #f0ad4e; }
 .remove-btn:hover { background-color: #c9302c; }
 .add-remove-btn:hover { background-color: #4cae4c; }
 .finalize-add-btn:hover { background-color: #31b0d5; }
 .cancel-add-btn:hover { background-color: #ec971f; }
 
-
 /* Row containing Add/Remove buttons and totals */
-.calculation-control {
-    border-top: 1px solid #eee;
-    padding-top: 8px;
-    margin-top: 5px; /* Reduced margin */
-    border-bottom: none; /* No border below total row */
-}
-.calculation-control span:first-child { /* Style the total label */
-    font-weight: bold;
-    color: #333;
-}
-.calculation-control button { /* Position main Add button */
-     margin-left: auto;
-}
+.calculation-control { border-top: 1px solid #eee; padding-top: 8px; margin-top: 5px; border-bottom: none; }
+.calculation-control span:first-child { font-weight: bold; color: #333; }
+.calculation-control button { margin-left: auto; }
 
-/* Finalized dynamic rows (reuse .result-row styles) */
+/* Finalized dynamic rows */
 #otherAllowancesContainer .result-row,
-#otherDeductionsContainer .result-row {
-    padding: 4px 0; /* Slightly less padding for dynamic items */
-    border-bottom: 1px dotted #eee; /* Dotted separator */
-}
+#otherDeductionsContainer .result-row { padding: 4px 0; border-bottom: 1px dotted #eee; }
 #otherAllowancesContainer .result-row:last-child,
-#otherDeductionsContainer .result-row:last-child {
-    border-bottom: none; /* No border after last dynamic item */
-}
+#otherDeductionsContainer .result-row:last-child { border-bottom: none; }
 
-
-/* Add margin to the remove button in finalized rows */
+/* Remove button in finalized rows */
 #otherAllowancesContainer .result-row .remove-btn,
-#otherDeductionsContainer .result-row .remove-btn {
-    margin-left: 10px;
-}
-
+#otherDeductionsContainer .result-row .remove-btn { margin-left: 10px; }
 
 /* Disclaimer */
-.disclaimer {
-    margin-top: 20px;
-    font-size: 0.8em;
-    color: #777;
-    text-align: center;
-}
+.disclaimer { margin-top: 20px; font-size: 0.8em; color: #777; text-align: center; padding: 0 10px; }
+
+
+/* ===========================
+   Mobile Responsive Styles
+   =========================== */
+@media (max-width: 600px) {
+    body {
+        font-size: 14px; /* Slightly smaller base font */
+    }
+
+    .calculator {
+        padding: 10px; /* Reduce padding */
+        margin: 0; /* Remove margin for edge-to-edge */
+        border-radius: 0;
+        max-width: 100%; /* Allow full width */
+    }
+
+    h1 { font-size: 1.4em; }
+    h2 { font-size: 1.2em; }
+    h3 { font-size: 1.0em; }
+
+    input[type="number"], select {
+        padding: 10px 8px; /* Slightly larger touch target */
+    }
+
+    /* Allow key-value rows to wrap */
+    .result-row,
+    .deduction-option {
+        flex-wrap: wrap;
+    }
+
+    .result-row span:first-child,
+    .deduction-option label {
+        flex-basis: 100%; /* Label takes full width */
+        margin-bottom: 2px; /* Space below label when wrapped */
+        padding-right: 0;
+        color: #333; /* Darker label text for clarity */
+    }
+
+    .result-row span:last-child,
+    .deduction-option span {
+        flex-basis: 100%; /* Value takes full width */
+        text-align: right; /* Keep value aligned right */
+        padding-left: 0;
+        font-size: 1.05em; /* Slightly larger value text */
+    }
+
+    /* Special handling for Total/Add button row */
+    .calculation-control span:first-child {
+         flex-basis: auto; /* Don't force total label full width */
+         flex-grow: 1;
+    }
+     .calculation-control span:last-child {
+         flex-basis: auto; /* Don't force total value full width */
+         text-align: right;
+    }
+    .calculation-control button.add-remove-btn {
+         font-size: 0.85em; /* Slightly smaller add button text */
+         padding: 4px 8px;
+         margin-left: 10px; /* Ensure space */
+    }
+
+    /* Adjust finalized dynamic rows for wrapping */
+    .dynamic-display-row span:first-child { /* Name */
+         flex-basis: 60%; /* Give name more space */
+         margin-bottom: 0; /* No margin needed if side-by-side */
+    }
+    .dynamic-display-row span:last-child { /* Amount */
+         flex-basis: 30%; /* Amount takes less space */
+         text-align: right;
+         width: auto; /* Don't force full width */
+         margin-bottom: 0;
+    }
+     .dynamic-display-row .remove-btn {
+         flex-basis: auto; /* Let button size naturally */
+         margin-left: auto; /* Push remove button to the right */
+         padding: 2px 6px;
+         font-size: 0.8em;
+     }
+
+
+    /* Temporary input row adjustments */
+    .temporary-input-row input.item-label {
+        flex-basis: 100%; /* Label full width */
+        margin-right: 0; /* No right margin */
+    }
+    .temporary-input-row input.item-amount {
+        flex-basis: calc(60% - 5px); /* Amount takes more space */
+        margin-right: 5px;
+    }
+    .temporary-input-row button {
+        flex-basis: calc(20% - 5px); /* Buttons take less space */
+        font-size: 0.85em;
+        padding: 5px; /* Adjust padding */
+    }
+    .temporary-input-row .finalize-add-btn { margin-left: 0; } /* Align Add button left */
+    .temporary-input-row .cancel-add-btn { margin-left: 5px; } /* Space before Cancel */
+
+
+    /* Ensure checkboxes align well */
+     .deduction-option input[type="checkbox"] {
+         margin-top: 2px; /* Align better with label */
+     }
+    .deduction-option label {
+         flex-basis: calc(100% - 30px); /* Adjust basis considering checkbox */
+         margin-bottom: 0; /* Remove bottom margin */
+    }
+     .deduction-option span {
+          flex-basis: 100%; /* Value below */
+          margin-top: 2px;
+     }
+
+    .disclaimer {
+        font-size: 0.75em; /* Smaller disclaimer */
+    }
+
+} /* End of Media Query */
