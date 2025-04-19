@@ -2,134 +2,142 @@
    Base Styles (Desktop First)
    =========================== */
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Modern font stack */
     margin: 0;
     padding: 0;
+    background-color: #f4f7f6; /* Slightly different background */
     font-size: 16px;
     line-height: 1.6;
     color: #333;
-    /* --- BODY BACKGROUND IMAGE --- */
-    /* Replace 'parliament_bg.jpg' with your actual image file */
-    /* Ensure the image is large enough and suitable for background use */
-    /* The color is a fallback and affects image appearance if it has transparency */
-    background-image: linear-gradient(rgba(244, 247, 246, 0.85), rgba(244, 247, 246, 0.95)), url('parliament_bg.jpg');
-    background-color: #f4f7f6; /* Fallback color */
-    background-size: cover; /* Scale the image */
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed; /* Image stays fixed while scrolling */
 }
 
 .calculator {
-    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
-    padding: 30px;
+    background-color: #ffffff;
+    padding: 30px; /* More padding */
     border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    max-width: 720px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08); /* Softer shadow */
+    max-width: 720px; /* Slightly wider */
     margin: 40px auto;
     box-sizing: border-box;
-    position: relative; /* Needed for pseudo-element watermark */
-    overflow: hidden; /* Prevent watermark overflow */
-    border: 1px solid rgba(0, 0, 0, 0.05); /* Subtle border */
 }
 
-/* --- CALCULATOR WATERMARK --- */
-.calculator::before {
-    content: "";
-    position: absolute;
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
-    width: 80%; /* Adjust size as needed */
-    height: 80%;
-    transform: translate(-50%, -50%); /* Fine-tune centering */
-    /* Replace 'ashoka_emblem.svg' with your actual SVG or PNG file */
-    background-image: url('ashoka_emblem.svg');
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: contain; /* Scale emblem nicely */
-    opacity: 0.04; /* VERY IMPORTANT: Keep opacity low for watermark */
-    z-index: 0; /* Behind content but above background */
-    pointer-events: none; /* Make it non-interactive */
+h1, h2, h3 {
+    text-align: center;
+    color: #2c3e50; /* Dark blue-grey */
+    margin-top: 0;
+    margin-bottom: 25px;
+    font-weight: 600;
 }
-
-/* Ensure calculator content is above the watermark */
-.input-section, .output-section, h1, .disclaimer {
-    position: relative;
-    z-index: 1;
-}
-
-
-h1, h2, h3 { /* ... Keep h styles ... */ }
 h1 { font-size: 2em; }
 h2 { font-size: 1.5em; margin-top: 30px; border-bottom: 1px solid #eee; padding-bottom: 10px;}
 h3 { font-size: 1.25em; margin-bottom: 15px; text-align: left; color: #34495e; }
 
-.input-section, .output-section { margin-bottom: 30px; }
-label { /* ... Keep label styles ... */ }
-input[type="number"], select { /* ... Keep input/select styles ... */ }
-#basicPayContainer { /* ... Keep styles ... */ }
-#basicPayContainer label { /* ... Keep styles ... */ }
 
-.output-section { border: none; padding: 0; background-color: transparent; border-radius: 0; }
+.input-section, .output-section {
+    margin-bottom: 30px;
+}
 
-.result-row { /* ... Keep styles ... */ }
+label {
+    display: block;
+    margin-top: 15px;
+    margin-bottom: 7px;
+    font-weight: 500; /* Medium weight */
+    color: #555;
+    font-size: 0.95em;
+}
+
+input[type="number"], select {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 15px;
+    border: 1px solid #dcdcdc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1em;
+    background-color: #fff; /* Ensure white background */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+input[type="number"]:focus, select:focus {
+    border-color: #3498db; /* Brighter blue focus */
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+#basicPayContainer { margin-bottom: 15px; }
+#basicPayContainer label { margin-top: 0; }
+
+/* General Output Section Styling */
+.output-section { border: none; padding: 0; background-color: transparent; border-radius: 0; } /* Remove output section border */
+
+.result-row {
+    display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #ecf0f1; align-items: center; flex-wrap: nowrap;
+}
+/* Remove bottom border logic */
 #otherAllowancesContainer + .input-area + .calculation-control,
 #otherDeductionsContainer + .input-area + .calculation-control,
 .deductions .deduction-option:last-of-type { border-bottom: none; }
 #otherAllowancesContainer > .result-row,
-#otherDeductionsContainer > .result-row { border-bottom: 1px dotted #bdc3c7; }
+#otherDeductionsContainer > .result-row { border-bottom: 1px dotted #bdc3c7; } /* Different dotted border */
 #otherAllowancesContainer > .result-row:last-of-type,
 #otherDeductionsContainer > .result-row:last-of-type { border-bottom: none; }
 
-.result-row span:first-child { /* ... Keep styles ... */ }
-.result-row span:last-child { /* ... Keep styles ... */ }
 
-.gross span, .net span { /* ... Keep styles ... */ }
-.gross span:last-child { /* ... Keep styles ... */ }
-.net span:last-child { /* ... Keep styles ... */ }
+.result-row span:first-child { font-weight: 400; color: #555; text-align: left; padding-right: 15px; flex-grow: 1; flex-shrink: 1; }
+.result-row span:last-child { font-weight: 600; text-align: right; flex-shrink: 0; white-space: nowrap; color: #2c3e50; }
+
+.gross span, .net span { font-weight: 700; font-size: 1.2em; }
+.gross span:last-child { color: #2980b9; } /* Different blue */
+.net span:last-child { color: #c0392b; } /* Different red */
 
 hr { border: 0; height: 1px; background-color: #e0e0e0; margin: 25px 0; }
 
-.deductions { margin-top: 25px; padding-top: 0; border-top: none; }
+/* Deductions Section Specifics */
+.deductions { margin-top: 25px; padding-top: 0; border-top: none; } /* No top border */
 .deductions h3 { border-bottom: 1px solid #eee; padding-bottom: 10px; }
 .deductions .result-row { border-bottom: none; padding: 6px 0; }
 .total-deductions span { font-weight: 700; }
 
-.deductions .deduction-option { /* ... Keep styles ... */ }
-.deductions .deduction-option input[type="checkbox"] { /* ... Keep styles ... */ }
-.deductions .deduction-option label { /* ... Keep styles ... */ }
-.deductions .deduction-option span { /* ... Keep styles ... */ }
+/* Checkbox Deduction Options */
+.deductions .deduction-option { display: flex; align-items: center; padding: 10px 0; justify-content: flex-start; border-bottom: 1px solid #ecf0f1; }
+.deductions .deduction-option input[type="checkbox"] { width: auto; margin-right: 12px; flex-shrink: 0; transform: scale(1.1); cursor: pointer; accent-color: #3498db; /* Color checkbox */}
+.deductions .deduction-option label { margin: 0; font-weight: 400; flex-grow: 1; text-align: left; cursor: pointer; }
+.deductions .deduction-option span { font-weight: 600; text-align: right; min-width: 50px; padding-left: 10px; flex-shrink: 0; }
 
 /* --- Styles for Dynamic Rows (Desktop) --- */
-.input-area { padding: 15px 0 5px 0; margin-bottom: 10px; display: none; background-color:rgba(248, 249, 249, 0.8); border: 1px solid #eee; border-radius: 5px; }
+.input-area { padding: 15px 0 5px 0; margin-bottom: 10px; display: none; background-color:#f8f9f9; border: 1px solid #eee; border-radius: 5px; }
 .input-area.visible { display: block; }
+
 .temporary-input-row { display: flex; align-items: center; margin-bottom: 10px; flex-wrap: nowrap; padding: 0 10px; }
 .temporary-input-row input[type="text"],
 .temporary-input-row input[type="number"] { flex-grow: 1; margin: 0 8px 0 0; width: auto; padding: 8px 10px; border: 1px solid #ccc; border-radius: 4px; }
 .temporary-input-row input.item-label { flex-grow: 2; margin-right: 15px; }
 
-/* Buttons */
-.remove-btn, .add-remove-btn, .finalize-add-btn, .cancel-add-btn { /* ... Keep styles ... */ }
-.remove-btn { /* ... Keep styles ... */ }
-.add-remove-btn { /* ... Keep styles ... */ }
-.finalize-add-btn { /* ... Keep styles ... */ }
-.cancel-add-btn { /* ... Keep styles ... */ }
-.remove-btn:hover { /* ... Keep styles ... */ }
-.add-remove-btn:hover { /* ... Keep styles ... */ }
-.finalize-add-btn:hover { /* ... Keep styles ... */ }
-.cancel-add-btn:hover { /* ... Keep styles ... */ }
-button:active { /* ... Keep styles ... */ }
+/* General Add/Remove Buttons */
+.remove-btn, .add-remove-btn, .finalize-add-btn, .cancel-add-btn { color: white; border: none; border-radius: 5px; padding: 6px 14px; cursor: pointer; font-size: 0.9em; margin-left: 8px; flex-shrink: 0; transition: background-color 0.2s ease, transform 0.1s ease; font-weight: 500;}
+.remove-btn { background-color: #e74c3c; } /* Red */
+.add-remove-btn { background-color: #2ecc71; } /* Green */
+.finalize-add-btn { background-color: #3498db; } /* Blue */
+.cancel-add-btn { background-color: #f39c12; } /* Orange */
+.remove-btn:hover { background-color: #c0392b; }
+.add-remove-btn:hover { background-color: #27ae60; }
+.finalize-add-btn:hover { background-color: #2980b9; }
+.cancel-add-btn:hover { background-color: #e67e22; }
+button:active { transform: scale(0.98); } /* Button press effect */
 
+
+/* Row containing Add/Remove buttons and totals */
 .calculation-control { border-top: 1px solid #ecf0f1; padding-top: 12px; margin-top: 10px; border-bottom: none; }
 .calculation-control span:first-child { font-weight: 600; color: #333; }
 .calculation-control button { margin-left: auto; }
 
+/* Finalized dynamic rows */
 #otherAllowancesContainer .result-row,
 #otherDeductionsContainer .result-row { padding: 6px 0; border-bottom: 1px dotted #bdc3c7; }
 #otherAllowancesContainer .result-row .remove-btn,
 #otherDeductionsContainer .result-row .remove-btn { margin-left: 15px; }
 
-.disclaimer { margin-top: 30px; font-size: 0.9em; color: #888; text-align: center; padding: 0 15px; background-color: rgba(255,255,255,0.6); border-radius: 4px; display: inline-block; }
+/* Disclaimer */
+.disclaimer { margin-top: 30px; font-size: 0.9em; color: #888; text-align: center; padding: 0 15px; }
 
 
 /* ===========================
@@ -137,83 +145,76 @@ button:active { /* ... Keep styles ... */ }
    =========================== */
 @media (max-width: 600px) {
     body {
-        font-size: 15px;
-        -webkit-text-size-adjust: 100%;
-        /* --- MOBILE BODY BACKGROUND --- */
-        /* Using a simpler background or just color for mobile for clarity */
-        background-image: none; /* Remove complex image */
-        background-color: #eef1f5; /* Light blue-grey background */
+        font-size: 15px; /* Mobile base font */
+        background-color: #ffffff; /* White background for mobile */
+        color: #222; /* Darker text */
     }
 
     .calculator {
-        padding: 10px; /* Less padding */
+        padding: 15px;
         margin: 0;
         border-radius: 0;
         max-width: 100%;
         box-shadow: none;
-        background-color: #ffffff; /* White calculator area */
-        border: none; /* Remove border */
-    }
-    /* --- MOBILE WATERMARK --- */
-    /* Optionally hide or make watermark smaller/more opaque */
-    .calculator::before {
-        opacity: 0.03; /* Even fainter on mobile */
-        width: 60%; /* Smaller */
-        height: 60%;
+        background-color: #ffffff; /* Ensure calc background is white */
     }
 
+    h1 { font-size: 1.6em; color: #16a085; /* Teal heading */ margin-bottom: 20px;}
+    h2 { font-size: 1.3em; color: #16a085; border-bottom-color: #16a085; margin-bottom: 15px;}
+    h3 { font-size: 1.15em; color: #2c3e50; border-bottom-color: #eee; padding-bottom: 8px; margin-bottom: 10px; }
 
-    h1 { font-size: 1.5em; color: #2c3e50; margin-bottom: 15px;}
-    h2 { font-size: 1.2em; color: #34495e; border-bottom-color: #ddd; margin-bottom: 12px; padding-bottom: 8px;}
-    h3 { font-size: 1.1em; color: #34495e; border-bottom: none; padding-bottom: 5px; margin-bottom: 8px; }
+    .input-section { margin-bottom: 20px; background-color: #f9f9f9; padding: 15px; border-radius: 8px; }
+    .output-section { padding: 0; } /* Remove padding around output groups */
 
-    .input-section { margin-bottom: 15px; background-color: transparent; padding: 0; border-radius: 0; } /* Remove distinct background */
-    .output-section { padding: 0; }
-
-    label { color: #444; font-weight: 600; font-size: 0.9em; margin-bottom: 4px; }
-    input[type="number"], select { padding: 12px 10px; margin-bottom: 12px; background-color: #fdfdfd; border-color: #ccc; }
-    input[type="number"]:focus, select:focus { border-color: #555; box-shadow: none;} /* Simpler focus */
+    label { color: #333; font-weight: 600; }
+    input[type="number"], select { padding: 12px 10px; margin-bottom: 15px; background-color: #fdfdfd; border-color: #bbb; } /* Lighter inputs */
+    input[type="number"]:focus, select:focus { border-color: #16a085; box-shadow: 0 0 0 3px rgba(22, 160, 133, 0.2);}
 
     /* Stack result rows */
-    .result-row { flex-wrap: wrap; padding: 8px 5px; border-bottom: 1px solid #eee; }
-    .result-row span:first-child { flex-basis: 100%; margin-bottom: 3px; color: #666; font-weight: 400; font-size: 0.9em; }
+    .result-row {
+        flex-wrap: wrap;
+        padding: 8px 5px; /* Adjust padding */
+        border-bottom: 1px solid #f0f0f0; /* Lighter border */
+    }
+    .result-row span:first-child { flex-basis: 100%; margin-bottom: 4px; color: #555; font-weight: 400; font-size: 0.9em; }
     .result-row span:last-child { flex-basis: 100%; text-align: right; font-size: 1.1em; color: #111; font-weight: 600;}
 
     /* Total/Add button row */
-    .calculation-control { padding: 10px 5px; margin-top: 10px; border-top: 1px solid #ddd; background-color: #f8f8f8; border-radius: 0; }
+    .calculation-control { padding: 12px 5px; margin-top: 10px; border-top: 1px solid #ccc; background-color: #f8f8f8; border-radius: 0 0 5px 5px; }
     .calculation-control span:first-child { font-weight: bold; color: #333; }
-    .calculation-control button.add-remove-btn { font-size: 0.95em; padding: 8px 12px; margin-left: 10px; background-color: #555; } /* Darker Add button */
-    .calculation-control button.add-remove-btn:hover { background-color: #444; }
+    .calculation-control button.add-remove-btn { font-size: 0.95em; padding: 8px 12px; margin-left: 10px; background-color: #1abc9c; /* Teal add button */ }
+    .calculation-control button.add-remove-btn:hover { background-color: #16a085; }
 
     /* Finalized dynamic rows */
-    #otherAllowancesContainer, #otherDeductionsContainer { margin-bottom: 5px; }
-    .dynamic-display-row { padding: 6px 5px; }
+    #otherAllowancesContainer, #otherDeductionsContainer { margin-bottom: 10px; }
     .dynamic-display-row span:first-child { flex-basis: 100%; margin-bottom: 2px; font-size: 0.95em; }
     .dynamic-display-row span:last-child { flex-basis: 70%; font-size: 1em; }
-    .dynamic-display-row .remove-btn { flex-basis: auto; margin-left: auto; padding: 3px 8px; font-size: 0.85em; background-color: #c0392b; }
+    .dynamic-display-row .remove-btn { flex-basis: auto; margin-left: auto; padding: 3px 8px; font-size: 0.85em; background-color: #e74c3c; } /* Red remove button */
 
     /* Mobile Temporary input row - Stacked */
-    .input-area { padding: 15px 10px; margin-bottom: 10px; background-color: #f0f4f8; border: 1px solid #d6dde2; border-radius: 5px; }
+    .input-area { padding: 15px; margin-bottom: 10px; background-color: #eaf6f9; border: 1px solid #c5e0e6; border-radius: 5px; }
     .temporary-input-row { flex-wrap: wrap; justify-content: flex-start; }
     .temporary-input-row input.item-label,
-    .temporary-input-row input.item-amount { flex-basis: 100%; width: 100%; margin: 0 0 10px 0; box-sizing: border-box; padding: 10px 8px; }
-    .temporary-input-row .finalize-add-btn,
-    .temporary-input-row .cancel-add-btn { flex-basis: 100%; width: 100%; margin: 0 0 8px 0; box-sizing: border-box; font-size: 1em; padding: 10px 5px; }
-    .temporary-input-row .finalize-add-btn { background-color: #555; } /* Darker Add */
-    .temporary-input-row .cancel-add-btn { background-color: #888; } /* Grey Cancel */
-    .temporary-input-row .finalize-add-btn:hover { background-color: #444; }
-    .temporary-input-row .cancel-add-btn:hover { background-color: #777; }
+    .temporary-input-row input.item-amount { flex-basis: 100%; width: 100%; margin: 0 0 12px 0; box-sizing: border-box; padding: 10px 8px; }
+    /* Buttons full width, stacked */
+     .temporary-input-row .finalize-add-btn,
+     .temporary-input-row .cancel-add-btn { flex-basis: 100%; width: 100%; margin: 0 0 8px 0; box-sizing: border-box; font-size: 1em; padding: 10px 5px; }
+     /* Different button colors for mobile */
+    .temporary-input-row .finalize-add-btn { background-color: #2980b9; } /* Blue */
+    .temporary-input-row .cancel-add-btn { background-color: #7f8c8d; } /* Grey */
+    .temporary-input-row .finalize-add-btn:hover { background-color: #2471a3; }
+    .temporary-input-row .cancel-add-btn:hover { background-color: #616a6b; }
 
 
     /* Checkbox alignment */
-    .deductions { background-color: transparent; padding: 0; border-radius: 0; margin-top: 20px; }
-    .deductions .deduction-option { flex-wrap: wrap; padding: 10px 5px; border-bottom: 1px solid #eee;}
+    .deductions { background-color: #f9f9f9; padding: 15px; border-radius: 8px; margin-top: 20px; }
+    .deductions .deduction-option { flex-wrap: wrap; padding: 10px 0; border-bottom: 1px solid #eee;}
     .deductions .deduction-option:last-of-type { border-bottom: none; }
-    .deductions .deduction-option input[type="checkbox"] { margin-bottom: 5px; transform: scale(1.3); margin-right: 10px; accent-color: #555;} /* Darker checkbox */
+    .deductions .deduction-option input[type="checkbox"] { margin-bottom: 5px; transform: scale(1.3); margin-right: 10px; }
     .deductions .deduction-option label { flex-basis: calc(100% - 40px); margin-bottom: 0; padding-left: 5px; line-height: 1.3; }
     .deductions .deduction-option span { flex-basis: 100%; margin-top: 5px; text-align: right; font-size: 1.1em; }
 
-    .disclaimer { font-size: 0.8em; margin-top: 15px; padding: 0 5px; color: #777; }
+    .disclaimer { font-size: 0.8em; margin-top: 20px; padding: 0 10px; color: #666; }
 
     hr { margin: 20px 0; background-color: #e5e5e5; }
 
