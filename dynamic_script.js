@@ -79,20 +79,17 @@ function clearResults() {
 
     if (otherAllowancesContainer) otherAllowancesContainer.innerHTML = '';
     if (otherDeductionsContainer) otherDeductionsContainer.innerHTML = '';
-    if (addAllowanceInputArea) addAllowanceInputArea.innerHTML = ''; // Clear input area
-    if (addDeductionInputArea) addDeductionInputArea.innerHTML = ''; // Clear input area
-    if (addAllowanceInputArea) addAllowanceInputArea.classList.remove('visible'); // Hide
-    if (addDeductionInputArea) addDeductionInputArea.classList.remove('visible'); // Hide
+    if (addAllowanceInputArea) addAllowanceInputArea.innerHTML = '';
+    if (addDeductionInputArea) addDeductionInputArea.innerHTML = '';
+    if (addAllowanceInputArea) addAllowanceInputArea.classList.remove('visible');
+    if (addDeductionInputArea) addDeductionInputArea.classList.remove('visible');
 }
 
 // --- Dynamic Row/Entry Functions ---
-
-// Creates and shows the temporary input row
 function showTemporaryInputRow(areaContainer, typePrefix) {
     console.log(`Showing temporary input for ${typePrefix}`);
-    // Clear any previous temporary row in this area
     areaContainer.innerHTML = '';
-    areaContainer.classList.add('visible'); // Make the area visible
+    areaContainer.classList.add('visible');
 
     const row = document.createElement('div');
     row.className = 'temporary-input-row';
@@ -120,17 +117,13 @@ function showTemporaryInputRow(areaContainer, typePrefix) {
     const cancelBtn = document.createElement('button');
     cancelBtn.textContent = 'Cancel';
     cancelBtn.className = 'cancel-add-btn';
-    cancelBtn.onclick = () => {
-        areaContainer.innerHTML = ''; // Clear the input row
-        areaContainer.classList.remove('visible'); // Hide the area
-    };
+    cancelBtn.onclick = () => { areaContainer.innerHTML = ''; areaContainer.classList.remove('visible'); };
     row.appendChild(cancelBtn);
 
     areaContainer.appendChild(row);
     labelInput.focus();
 }
 
-// Finalizes the entry and creates the static display row
 function finalizeDynamicEntry(event, typePrefix) {
     const tempRow = event.target.closest('.temporary-input-row');
     const labelInput = tempRow.querySelector('.item-label');
@@ -148,23 +141,13 @@ function finalizeDynamicEntry(event, typePrefix) {
     displayRow.className = 'result-row dynamic-display-row';
     displayRow.dataset.amount = itemAmount;
 
-    const nameSpan = document.createElement('span');
-    nameSpan.textContent = itemName;
-    displayRow.appendChild(nameSpan);
-
-    const amountSpan = document.createElement('span');
-    amountSpan.textContent = Math.round(itemAmount).toLocaleString();
-    displayRow.appendChild(amountSpan);
-
-    const removeBtn = document.createElement('button');
-    removeBtn.textContent = 'Remove';
-    removeBtn.className = 'remove-btn';
-    removeBtn.onclick = () => { displayRow.remove(); calculateSalary(); };
-    displayRow.appendChild(removeBtn);
+    const nameSpan = document.createElement('span'); nameSpan.textContent = itemName; displayRow.appendChild(nameSpan);
+    const amountSpan = document.createElement('span'); amountSpan.textContent = Math.round(itemAmount).toLocaleString(); displayRow.appendChild(amountSpan);
+    const removeBtn = document.createElement('button'); removeBtn.textContent = 'Remove'; removeBtn.className = 'remove-btn'; removeBtn.onclick = () => { displayRow.remove(); calculateSalary(); }; displayRow.appendChild(removeBtn);
 
     displayContainer.appendChild(displayRow);
-    inputAreaContainer.innerHTML = ''; // Clear the temporary input row
-    inputAreaContainer.classList.remove('visible'); // Hide the input area
+    inputAreaContainer.innerHTML = '';
+    inputAreaContainer.classList.remove('visible');
     calculateSalary();
 }
 
@@ -176,7 +159,7 @@ function getCGHSRate(level) {
     if (numericLevel <= 5) return 250;
     if (numericLevel === 6) return 450;
     if (numericLevel <= 11) return 650;
-    return 1000; // Levels 12+
+    return 1000;
 }
 
 // --- Core Logic ---
@@ -327,22 +310,14 @@ window.onload = () => {
     applyCGHS = document.getElementById('applyCGHS');
     otherAllowancesContainer = document.getElementById('otherAllowancesContainer');
     addAllowanceBtn = document.getElementById('addAllowanceBtn');
-    addAllowanceInputArea = document.getElementById('addAllowanceInputArea'); // Input area
+    addAllowanceInputArea = document.getElementById('addAllowanceInputArea');
     otherDeductionsContainer = document.getElementById('otherDeductionsContainer');
     addDeductionBtn = document.getElementById('addDeductionBtn');
-    addDeductionInputArea = document.getElementById('addDeductionInputArea'); // Input area
+    addDeductionInputArea = document.getElementById('addDeductionInputArea');
 
     // --- Critical Check ---
-    const requiredElements = [
-        payLevelSelect, basicPayContainer, daPercentageInput, hraCitySelect, taCitySelect,
-        applyNPS, applyCGHS, otherAllowancesContainer, addAllowanceBtn, addAllowanceInputArea,
-        otherDeductionsContainer, addDeductionBtn, addDeductionInputArea
-    ];
-    if (requiredElements.some(el => !el)) {
-        console.error("CRITICAL ERROR: One or more essential HTML elements not found. Check element IDs.");
-        alert("Error: Calculator elements missing. Please check HTML IDs.");
-        return;
-    }
+    const requiredElements = [ payLevelSelect, basicPayContainer, daPercentageInput, hraCitySelect, taCitySelect, applyNPS, applyCGHS, otherAllowancesContainer, addAllowanceBtn, addAllowanceInputArea, otherDeductionsContainer, addDeductionBtn, addDeductionInputArea ];
+    if (requiredElements.some(el => !el)) { console.error("CRITICAL ERROR: One or more essential HTML elements not found. Check element IDs."); alert("Error: Calculator elements missing. Please check HTML IDs."); return; }
 
     console.log("Populating pay levels...");
     populatePayLevels();
@@ -354,13 +329,11 @@ window.onload = () => {
     taCitySelect.addEventListener('change', calculateSalary);
     applyNPS.addEventListener('change', calculateSalary);
     applyCGHS.addEventListener('change', calculateSalary);
-    // Main Add buttons show the temporary input row
     addAllowanceBtn.addEventListener('click', () => showTemporaryInputRow(addAllowanceInputArea, 'allowance'));
     addDeductionBtn.addEventListener('click', () => showTemporaryInputRow(addDeductionInputArea, 'deduction'));
-    // Listeners for finalize/cancel/remove are added dynamically within other functions
 
     console.log("Event listeners added.");
-    clearResults(); // Set initial state
+    clearResults();
     console.log("Calculator setup complete.");
 };
 
