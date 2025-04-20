@@ -5,14 +5,14 @@ body {
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f7f6; /* Restored simple background color */
+    background-color: #f4f7f6;
     font-size: 16px;
     line-height: 1.6;
     color: #333;
 }
 
 .calculator {
-    background-color: #ffffff; /* Solid white background */
+    background-color: #ffffff;
     padding: 30px;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
@@ -22,10 +22,8 @@ body {
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Removed watermark styles */
-
 /* Keep content positioning simple */
-.input-section, .output-section, h1, .disclaimer { }
+.input-section, .output-section, h1, footer { } /* Added footer here */
 
 
 h1, h2, h3 { text-align: center; color: #2c3e50; margin-top: 0; margin-bottom: 25px; font-weight: 600; }
@@ -41,7 +39,7 @@ input[type="number"]:focus, select:focus { border-color: #3498db; outline: none;
 #basicPayContainer { margin-bottom: 15px; }
 #basicPayContainer label { margin-top: 0; }
 
-.output-section { border: none; padding: 0; background-color: transparent; border-radius: 0; }
+.output-section { border: none; padding: 0; background-color: transparent; border-radius: 0; margin-bottom: 20px; /* Reduced margin before footer */ }
 
 .result-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #ecf0f1; align-items: center; flex-wrap: nowrap; }
 #otherAllowancesContainer + .input-area + .calculation-control,
@@ -104,7 +102,29 @@ button:active { transform: scale(0.98); }
 
 .save-section { text-align: center; padding-top: 15px; }
 
-.disclaimer { margin-top: 30px; font-size: 0.9em; color: #888; text-align: center; padding: 0 15px; display: inline-block; }
+.disclaimer { /* Removed styles as element is removed */ }
+
+/* --- Footer Styling (MODIFIED) --- */
+footer {
+    text-align: center;
+    margin-top: 30px; /* Space above footer, inside calculator */
+    padding: 15px; /* Padding inside footer */
+    font-size: 0.9em;
+    color: #555; /* Slightly darker text */
+    background-color: #f8f9fa; /* Light grey background */
+    border-top: 1px solid #dee2e6;
+    border-radius: 0 0 8px 8px; /* Match bottom corners of calculator */
+    /* Removed max-width and centering margins */
+    margin-left: -30px; /* Counteract calculator padding */
+    margin-right: -30px;
+    margin-bottom: -30px; /* Counteract calculator padding */
+}
+
+footer .creator-name {
+    font-weight: 600;
+    color: #333; /* Darker name */
+}
+/* --- End Footer Styling --- */
 
 
 /* ===========================
@@ -113,30 +133,29 @@ button:active { transform: scale(0.98); }
 @media (max-width: 600px) {
     body { font-size: 15px; -webkit-text-size-adjust: 100%; background-color: #ffffff; }
     .calculator { padding: 15px; margin: 0; border-radius: 0; max-width: 100%; box-shadow: none; background-color: #ffffff; border: none; }
-    /* Removed mobile watermark */
 
     h1 { font-size: 1.5em; color: #16a085; margin-bottom: 20px;}
     h2 { font-size: 1.2em; color: #16a085; border-bottom-color: #16a085; margin-bottom: 15px; padding-bottom: 8px;}
     h3 { font-size: 1.1em; color: #2c3e50; border-bottom: none; padding-bottom: 5px; margin-bottom: 8px; }
 
     .input-section { margin-bottom: 15px; background-color: transparent; padding: 0; border-radius: 0; }
-    .output-section { padding: 0; }
+    .output-section { padding: 0; margin-bottom: 15px; /* Space before footer */}
 
     label { color: #444; font-weight: 600; font-size: 0.9em; margin-bottom: 4px; }
     input[type="number"], select { padding: 12px 10px; margin-bottom: 12px; background-color: #fdfdfd; border-color: #ccc; }
     input[type="number"]:focus, select:focus { border-color: #555; box-shadow: none;}
 
-    .result-row { flex-wrap: wrap; padding: 8px 5px; border-bottom: 1px solid #f0f0f0; }
+    .result-row { flex-wrap: wrap; padding: 8px 0px; border-bottom: 1px solid #f0f0f0; } /* Reduced side padding */
     .result-row span:first-child { flex-basis: 100%; margin-bottom: 3px; color: #666; font-weight: 400; font-size: 0.9em; }
     .result-row span:last-child { flex-basis: 100%; text-align: right; font-size: 1.1em; color: #111; font-weight: 600;}
 
-    .calculation-control { padding: 10px 5px; margin-top: 10px; border-top: 1px solid #ddd; background-color: #f8f8f8; border-radius: 0; }
+    .calculation-control { padding: 10px 0px; margin-top: 10px; border-top: 1px solid #ddd; background-color: #f8f8f8; border-radius: 0; }
     .calculation-control span:first-child { font-weight: bold; color: #333; }
     .calculation-control button.add-remove-btn { font-size: 0.95em; padding: 8px 12px; margin-left: 10px; background-color: #555; }
     .calculation-control button.add-remove-btn:hover { background-color: #444; }
 
     #otherAllowancesContainer, #otherDeductionsContainer { margin-bottom: 5px; }
-    .dynamic-display-row { padding: 6px 5px; }
+    .dynamic-display-row { padding: 6px 0px; }
     .dynamic-display-row span:first-child { flex-basis: 100%; margin-bottom: 2px; font-size: 0.95em; }
     .dynamic-display-row span:last-child { flex-basis: 70%; font-size: 1em; }
     .dynamic-display-row .remove-btn { flex-basis: auto; margin-left: auto; padding: 3px 8px; font-size: 0.85em; background-color: #c0392b; }
@@ -153,18 +172,37 @@ button:active { transform: scale(0.98); }
     .temporary-input-row .cancel-add-btn:hover { background-color: #777; }
 
     .deductions { background-color: transparent; padding: 0; border-radius: 0; margin-top: 20px; }
-    .deductions .deduction-option { flex-wrap: wrap; padding: 10px 5px; border-bottom: 1px solid #eee;}
+    .deductions .deduction-option { flex-wrap: wrap; padding: 10px 0px; border-bottom: 1px solid #eee;}
     .deductions .deduction-option:last-of-type { border-bottom: none; }
     .deductions .deduction-option input[type="checkbox"] { margin-bottom: 5px; transform: scale(1.3); margin-right: 10px; accent-color: #555;}
     .deductions .deduction-option label { flex-basis: calc(100% - 40px); margin-bottom: 0; padding-left: 5px; line-height: 1.3; }
     .deductions .deduction-option span { flex-basis: 100%; margin-top: 5px; text-align: right; font-size: 1.1em; }
 
-    .save-section { margin-top: 10px; padding: 0 5px;}
+    .save-section { margin-top: 10px; padding: 0; } /* Remove side padding */
     .save-btn { font-size: 1.1em; padding: 12px 10px; background-color: #8e44ad; }
     .save-btn:hover { background-color: #732d91; }
 
-    .disclaimer { font-size: 0.8em; margin-top: 15px; padding: 0 5px; color: #777; }
+    .disclaimer { /* Removed */ }
 
     hr { margin: 20px 0; background-color: #e5e5e5; }
+
+    /* --- Mobile Footer Styling (MODIFIED) --- */
+    footer {
+        margin-top: 25px;
+        padding: 10px; /* Less padding */
+        font-size: 0.85em;
+        max-width: 100%; /* Full width */
+        border-top: 1px solid #eee;
+        margin-bottom: 0; /* Flush with bottom */
+        background-color: #f1f3f5; /* Mobile background color */
+        border-radius: 0; /* No rounding */
+        margin-left: -15px; /* Counteract calculator padding */
+        margin-right: -15px;
+        margin-bottom: -15px; /* Counteract calculator padding */
+    }
+    footer .creator-name {
+        color: #111; /* Darker name on mobile */
+    }
+    /* --- End Mobile Footer Styling --- */
 
 } /* End of Media Query */
