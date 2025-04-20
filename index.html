@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Salary Calculator (Generate Report)</title> <!-- Updated Title -->
+    <title>Salary Calculator (Save Image)</title>
     <link rel="stylesheet" href="style.css">
-    <!-- html2canvas is NO LONGER NEEDED for this approach -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" referrerpolicy="no-referrer"></script> -->
+    <!-- html2canvas library script tag WITHOUT integrity check -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" referrerpolicy="no-referrer"></script>
 </head>
 <body>
 
-<div class="calculator">
+<div class="calculator"> <!-- Main Calculator Container -->
     <h1>Salary Calculator (7th CPC)</h1>
 
     <!-- Input Section -->
@@ -44,7 +44,6 @@
     </div>
 
     <!-- Output / Calculation Section -->
-    <!-- Removed id="captureArea" as it's not needed -->
     <div class="output-section">
         <h2>Salary Calculation (per month)</h2>
 
@@ -106,17 +105,19 @@
 
         <!-- Save Button Area -->
         <div class="save-section">
-             <button id="saveImageBtn" class="save-btn">Generate Salary Report Image</button> <!-- Changed button text -->
+             <button id="saveImageBtn" class="save-btn">Generate Salary Report Image</button>
         </div>
 
-    </div>
+    </div> <!-- End of .output-section -->
 
-    <!-- Disclaimer -->
-    <div class="disclaimer">
-        Disclaimer: Calculator uses selectable inputs. Verify official rules and rates for precise figures. Assumes DA >= 50% for HRA rates (X:30%, Y:20%, Z:10%). For reference only.
-    </div>
+    <!-- Footer Section - MOVED INSIDE .calculator -->
+    <footer>
+        A simple tool to Calculate Salary of Central Government Employees. | Created by <span class="creator-name">Arpit Singh</span>
+    </footer>
+    <!-- End Footer Section -->
 
-</div>
+</div> <!-- End of .calculator div -->
+
 
 <script src="dynamic_script.js"></script>
 </body>
